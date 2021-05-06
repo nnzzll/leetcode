@@ -13,7 +13,7 @@ struct TreeNode
 };
 
 //BFS
-class Solution
+class BFS
 {
 public:
     int maxDepth(TreeNode *root)
@@ -37,5 +37,20 @@ public:
             depth++;
         }
         return depth;
+    }
+};
+
+class DFS
+{
+    int maxDepth(TreeNode *root)
+    {
+        if(root)
+        {
+            int left = maxDepth(root->left);
+            int right = maxDepth(root->right);
+            return max(left,right)+1;
+        }
+        else
+            return 0;
     }
 };

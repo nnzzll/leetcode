@@ -9,8 +9,8 @@ class TreeNode:
         self.right = right
 
 
-#BFS
-class Solution:
+# BFS
+class BFS:
     def maxDepth(self, root: TreeNode) -> int:
         queue = []
         depth = 0
@@ -24,8 +24,18 @@ class Solution:
                     queue.append(node.left)
                 if(node.right):
                     queue.append(node.right)
-            depth+=1
+            depth += 1
         return depth
+
+
+class DFS:
+    def maxDepth(self, root: TreeNode) -> int:
+        if(root):
+            left = self.maxDepth(root.left)
+            right = self.maxDepth(root.right)
+            return max(left,right)+1
+        else:
+            return 0
 
 root = TreeNode(3)
 root.left = TreeNode(9)
@@ -33,5 +43,5 @@ root.right = TreeNode(20)
 root.right.left = TreeNode(15)
 root.right.right = TreeNode(7)
 
-obj = Solution()
+obj = DFS()
 print(obj.maxDepth(root))

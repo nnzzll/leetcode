@@ -24,6 +24,12 @@ public:
             dp[i][0] = 1;
         for (int i = 1; i < nums.size(); i++)
             for (int j = 0; j < target + 1; j++)
-                return
+            {
+                if(j>=nums[i])
+                    dp[i][j] = dp[i-1][j]||dp[i-1][j-nums[i]];
+                else
+                    dp[i][j] = dp[i-1][j];
+            }
+        return dp[nums.size()-1][target];
     }
 };

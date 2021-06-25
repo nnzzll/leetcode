@@ -18,7 +18,7 @@ class Foo:
 
     def second(self, printSecond: 'Callable[[], None]') -> None:
         with self.firstdone:
-        # printSecond() outputs "second".
+            # printSecond() outputs "second".
             printSecond()
             self.seconddone.release()
 
@@ -26,8 +26,9 @@ class Foo:
 
         # Wait for the second job to be done.
         with self.seconddone:
-        # printThird() outputs "third".
+            # printThird() outputs "third".
             printThird()
+
 
 class Solution:
     def __init__(self) -> None:
@@ -37,25 +38,31 @@ class Solution:
     def foobar(self, nums):
         pool = []
         for num in nums:
-            if num==1:
-                pool.append(threading.Thread(target=self.foo.first,args=(print1,)))
-            elif num==2:
-                pool.append(threading.Thread(target=self.foo.second,args=(print2,)))
-            elif num==3:
-                pool.append(threading.Thread(target=self.foo.third,args=(print3,)))
+            if num == 1:
+                pool.append(threading.Thread(
+                    target=self.foo.first, args=(print1,)))
+            elif num == 2:
+                pool.append(threading.Thread(
+                    target=self.foo.second, args=(print2,)))
+            elif num == 3:
+                pool.append(threading.Thread(
+                    target=self.foo.third, args=(print3,)))
         for p in pool:
             p.start()
         for p in pool:
             p.join()
 
+
 def print1():
     print("First")
 
+
 def print2():
     print("Second")
+
 
 def print3():
     print("Third")
 
 
-Solution().foobar([1,3,2])
+Solution().foobar([1, 3, 2])
